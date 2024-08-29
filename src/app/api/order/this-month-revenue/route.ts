@@ -59,6 +59,8 @@ export async function GET(req: NextRequest) {
                 }
             }
         ])
+        console.log("-----------------------------------")
+        console.log(revenue)
         if (!revenue) {
             return NextResponse.json({ successs: false, message: "Error in finding revenue" }, { status: 400 })
         }

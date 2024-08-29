@@ -4,7 +4,8 @@ import { User } from '@/models/user.model'
 export interface Category extends Document {
     name: string,
     image: string,
-    restro: User
+    restro: User,
+    _id: string
 }
 
 const categorySchema: Schema<Category> = new Schema({

@@ -6,7 +6,7 @@ interface RootLayoutProps {
   
   export default async function RootLayout({ children }: RootLayoutProps) {
     return (
-      <div className="flex m-3  bg-slate-200 h-full">
+      <div className="flex pl-2 bg-slate-200 min-h-screen py-3">
         <Navbar/>
         {children}
       </div>

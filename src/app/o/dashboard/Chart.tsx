@@ -39,6 +39,7 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export default function Component() {
+  const[idx,setIdx] = React.useState(0);
   const [timeRange, setTimeRange] = React.useState("90d")
   const [dataDisplay,setDataDisplay] = React.useState([{ totalRevenue: 2000,orderCount: 1,date: "2024-06-13" }])
 
@@ -53,7 +54,7 @@ export default function Component() {
         console.log(res.data.data)
         setOneMonthData(res.data.data)
     } catch (error) {
-        
+        console.log(error)
     }
   }
 
@@ -62,7 +63,7 @@ export default function Component() {
         const res = await axios.get('/api/order/six-month');
         setSixMonthData(res.data.data)
     } catch (error) {
-        console.log("")
+        console.log("zErrro in sixmonth")
     }
   }
 
@@ -71,7 +72,7 @@ export default function Component() {
         const res = await axios.get('/api/order/one-year');
         setOneYearData(res.data.data)
     } catch (error) {
-        console.log("")
+        console.log("Error in one year")
     }
   }
 
@@ -80,7 +81,7 @@ export default function Component() {
         const res = await axios.get('/api/order/all-time');
         setAllData(res.data.data)
     } catch (error) {
-        console.log("")
+        console.log("error in all time")
     }
   }
 
@@ -95,36 +96,39 @@ export default function Component() {
 
   React.useEffect(()=>{
     setData("180d")
+    setIdx(idx+1)
   },[sixMonthData])
+
 
 
   
   const setData = (e:any)=>{
     setTimeRange(e)
     if(e=="30d"){
-      if(oneMonthData.length==0){
+      if(oneMonthData.length==0 && idx<3){
           oneMonth()
       }
       setDataDisplay(oneMonthData)
     }
     else if(e=="180d"){
-        if(sixMonthData.length==0){
+        if(sixMonthData.length==0 && idx<3){
             sixMonth()
         }
         setDataDisplay(sixMonthData)
     }
     else if(e=="365d"){
-        if(oneYearData.length==0){
+        if(oneYearData.length==0 && idx<3){
             oneYear()
         }
         setDataDisplay(oneYearData)
     }
     else if(e=="all"){
-        if(allData.length==0){
+        if(allData.length==0 && idx<3){
             allTime()
         }
         setDataDisplay(allData)
     }
+    
   }
 
 

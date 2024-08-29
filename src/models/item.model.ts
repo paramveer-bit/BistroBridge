@@ -4,6 +4,7 @@ import { User } from '@/models/user.model'
 
 
 export interface Item extends Document {
+    _id: string,
     code: string,
     name: string,
     image: string,

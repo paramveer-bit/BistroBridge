@@ -22,11 +22,16 @@ export interface MonthDetails extends Document {
     customer : number
 }
 
-export interface RevenueDetails extends Document {
-    totalRevenue : number,
-    totalCount : number,
-    totalCustomer : number,
-}
+// export interface RevenueDetails extends Document {
+//     totalRevenue : number,
+//     totalCount : number,
+//     totalCustomer : number,
+// }
+type RevenueDetails = {
+    totalRevenue: number;
+    totalCount: number;
+    totalCustomer: number;
+};
 
 
 
@@ -46,7 +51,13 @@ function DashBoardPage() {
                 setRevenueDetails(res.data.data)
                 console.log(res.data.data)
             } catch (error) {
-                console.log(error)
+                const revenue : RevenueDetails =  {
+                    totalRevenue : 0,
+                    totalCount : 0,
+                    totalCustomer : 0,
+                }
+                setRevenueDetails(revenue)
+              console.log(error)
             }
         }
         const fecthCriticalItems = async ()=>{

@@ -8,7 +8,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 ////------------------------Adding New Items---------------------------------
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
     await dbConnect()
     try {
         const session = await auth()
