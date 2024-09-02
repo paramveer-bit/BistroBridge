@@ -14,7 +14,6 @@ import loader from '@/assets/loader.gif'
 
 
 
-
 function Menu() {
 
     const[menu,setmenu] = useState([])
@@ -47,8 +46,8 @@ function Menu() {
 
 
   return (
+    
     <div className=" w-full mx-3 p-3 ml-52"> 
-        
         {
             loading ?
                 <Image src={loader} alt='Loading' className='mx-auto w-[50%] block'/>

@@ -14,7 +14,6 @@ export async function GET(req: NextRequest, { params }: { params: { orderid: str
     await dbConnect()
     try {
         const session = await auth()
-        console.log(session);
         const email = session?.user.email;
         if (!session) {
             return NextResponse.json({ message: "No Logged in User found", success: false }, { status: 401 })
@@ -38,7 +37,6 @@ export async function GET(req: NextRequest, { params }: { params: { orderid: str
             {
                 $match: {
                     _id: new mongoose.Types.ObjectId(orderid),
-                    restro: user._id
                 }
             },
             {
@@ -47,7 +45,7 @@ export async function GET(req: NextRequest, { params }: { params: { orderid: str
             {
                 $lookup: {
                     from: "items",
-                    localField: "items.orderItem",
+                    localField: "items._id",
                     foreignField: "_id",
                     as: "orderItemDetails"
 
@@ -64,8 +62,8 @@ export async function GET(req: NextRequest, { params }: { params: { orderid: str
             {
                 $group: {
                     _id: "$_id",
-                    name: { $first: "$name" }, // Assuming there's a single name per group
-                    phoneNo: { $first: "$phoneNo" },
+                    // name: { $first: "$name" }, // Assuming there's a single name per group
+                    // phoneNo: { $first: "$phoneNo" },
                     tableNo: { $first: "$tableNo" },
                     orderNo: { $first: "$orderNo" },
                     status: { $first: "$status" },
@@ -78,6 +76,7 @@ export async function GET(req: NextRequest, { params }: { params: { orderid: str
                 }
             },
         ])
+        console.log(order)
         if (!order) { return NextResponse.json({ message: "No order found", success: false }, { status: 400 }) }
 
 

@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 import { SessionProvider } from "next-auth/react"
 import { Toaster } from "@/components/ui/toaster";
-
+import AuthWrapper from "@/components/AuthWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,12 +19,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <SessionProvider>
         <body className={inter.className}>
-          {children}
-          <Toaster />
+          <SessionProvider>
+            <AuthWrapper>
+              {children}
+              <Toaster />
+            </AuthWrapper>
+          </SessionProvider>
         </body>
-      </SessionProvider>
+        
+      
     </html>
   );
 }

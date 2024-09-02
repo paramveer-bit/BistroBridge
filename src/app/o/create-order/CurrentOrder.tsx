@@ -32,7 +32,7 @@ type currentOrderProps = {
     orderItems : OrderItems[]
     handleDelete : (_id:String) => void
     handleQuantity : (_id:String,change:number) => void
-    handlePlaceOrder : (phoneNo:string,tableNo:string) => void
+    handlePlaceOrder : (phoneNo:string,tableNo:string) => Promise<boolean>
     buttonState : boolean
     totalOrderValue : number
 }
@@ -67,10 +67,14 @@ function CurrentOrder({handleDelete,orderItems,handleQuantity,handlePlaceOrder,b
         return true;
       };
 
-    const handelSubmit = () =>{
+    const handelSubmit = async () =>{
         const validation = handleValidation();
         if(!validation) return;
-        handlePlaceOrder(phoneNo,tableNo)
+        const result = await handlePlaceOrder(phoneNo,tableNo)
+        if(result){
+            setPhoneNo('');
+            setTableNo('');
+        }
     }
 
   return (
@@ -141,14 +145,14 @@ function CurrentOrder({handleDelete,orderItems,handleQuantity,handlePlaceOrder,b
 
                     </div>
                     <DialogFooter>
-                    <Button 
-                        variant={"destructive"} 
-                        onClick={handelSubmit} 
-                        disabled={buttonState}
-                        type="submit"
-                    >
-                        Place Order
-                    </Button>
+                        <Button 
+                            variant={"destructive"} 
+                            onClick={handelSubmit} 
+                            disabled={buttonState}
+                            type="submit"
+                        >
+                            Place Order
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
                 </Dialog>

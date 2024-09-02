@@ -143,6 +143,7 @@ function OrderPage() {
               <div className='flex w-full justify-between '>
                   {/* Items Table  */}
                   <div className='w-full mr-72'>
+                    {/* {console.log(orderItems)} */}
                       <DataTable columns={columns} data={orderItems} />
                   </div>
                   {/* Order Details */}
@@ -150,7 +151,7 @@ function OrderPage() {
                       <Image src={userIcon} alt="user" className='w-[50%] mx-auto border rounded-3xl'/>
                       {/* <div className='bg-blue-600 text-white rounded-2xl p-1'>Customer</div> */}
 
-                      <h1 className='text-2xl font-bold'>{order?.name}</h1>
+                      {/* <h1 className='text-2xl font-bold'>{order?.name}</h1> */}
                       
                       <div className='flex'>
                         <Image src={location} alt="" className='h-8 w-8'/>
@@ -158,7 +159,7 @@ function OrderPage() {
                       </div>
                       <div className='flex mb-8'>
                         <Image src={call} alt="" className='h-7 w-7'/>
-                        <h1 className='pt-1 px-4'>+91 {order?.phoneNo}</h1>
+                        {/* <h1 className='pt-1 px-4'>+91 {order?.phoneNo}</h1> */}
                       </div>
                       <hr />
 

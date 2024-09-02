@@ -11,6 +11,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         async jwt({ token, user }) {
             if (user) {
                 dbConnect()
+                console.log("pppppppppppppppppppppppppppppppp")
 
                 try {
                     const userFind = await UserModel.findOne({ email: user.email })
@@ -42,9 +43,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             return session
         },
         async signIn({ profile }) {
-            dbConnect()
-            const email = profile?.email
             try {
+                dbConnect()
+                const email = profile?.email
                 const user = await UserModel.findOne({ email })
                 console.log(user)
                 console.log("-----------------------------")

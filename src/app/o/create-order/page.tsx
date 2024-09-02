@@ -16,6 +16,7 @@ type OrderItems = {
     quantity : number
 }
 import { Item } from '@/models/item.model'
+import axios from 'axios'
 
 
 function NewOrderPage() {
@@ -91,9 +92,32 @@ function NewOrderPage() {
     };
 
     const handlePlaceOrder = async (phoneNo:string,tableNo:string) =>{
-        console.log(phoneNo)
-        console.log(tableNo)
-        console.log("Order will be placed now")
+        console.log(phoneNo,tableNo)
+        try {
+            setPlacingOrder(true)
+            const orders = order.map((item)=>{
+                return {
+                    _id: item._id,
+                    quantity: item.quantity
+                }
+            })
+            console.log(orders)
+
+            const res = await axios.post('/api/order/create-order',{phoneNo,tableNo,items:orders,orderValue:totalOrderValue})
+            console.log(res)
+            setTotalOrderValue(0)
+            setOrder([])
+            return true;
+        } catch (error) {
+            console.log(error)
+            toast({
+                title : "Order not placed",
+                description : "destructive"
+            })
+            return false;
+        } finally{
+            setPlacingOrder(false)
+        }
     }
 
 
