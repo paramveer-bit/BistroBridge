@@ -93,6 +93,7 @@ function CurrentOrder({handleDelete,orderItems,handleQuantity,handlePlaceOrder,b
                                         handleDelete={handleDelete}
                                         orderItem = {item}
                                         handleQuantity = {handleQuantity}
+                                        key={idx}
                                     />
                         })
                 }

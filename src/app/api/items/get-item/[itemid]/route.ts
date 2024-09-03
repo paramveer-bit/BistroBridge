@@ -12,6 +12,20 @@ export async function GET(req: NextRequest, { params }: { params: { itemid: stri
     await dbConnect()
     try {
 
+        const session = await auth()
+        console.log(session);
+        const email = session?.user.email;
+        if (!session) {
+            return NextResponse.json({ message: "No Logged in User found", success: false }, { status: 401 })
+
+        }
+
+        const user = await UserModel.findOne({ email });
+
+        if (!user) {
+            return NextResponse.json({ message: "User not found", success: false }, { status: 401 })
+        }
+
         const itemid = params.itemid;
 
         const item = await ItemModel.findById(itemid)

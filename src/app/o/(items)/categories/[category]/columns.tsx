@@ -48,9 +48,9 @@ export const columns: ColumnDef<menuList>[] = [
             //     currency: "USD",
             // }).format(amount)
             return  <div className="flex">
-                        <img
+                        <Image
                             src = {String(amount)} 
-                            // alt = "profile_icon"
+                            alt = "profile_icon"
                             width = {24}
                             height = {24}
                             className = " h-12 w-12 rounded-md border"

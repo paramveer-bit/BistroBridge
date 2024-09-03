@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ message: "User not found", success: false }, { status: 401 })
         }
 
-        const items = await ItemModel.find()
+        const items = await ItemModel.find({ restro: user._id })
 
         if (!items) { return NextResponse.json({ message: "No item found", success: false }, { status: 400 }) }
 

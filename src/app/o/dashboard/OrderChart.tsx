@@ -60,7 +60,7 @@ export default function Component() {
     fetchData()
   },[])
 
-  const filteredData = chartData.filter((item) => {
+  const filteredData = chartData.filter((item:any) => {
     const date = new Date(item.date)
     const now = new Date()
     let daysToSubtract = 90

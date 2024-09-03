@@ -127,7 +127,10 @@ function AddCategory() {
       
             <div className='grid grid-cols-3 gap-3'>
               {categories.map((category:cate, index) => (
-                    <button onClick={()=>handelCategoryCard(category._id)}>
+                    <button 
+                      onClick={()=>handelCategoryCard(category._id)}
+                      key={index}
+                    >
                       <div className="p-1" key={category._id}>
                         <Card className=''>
                           <CardHeader>
